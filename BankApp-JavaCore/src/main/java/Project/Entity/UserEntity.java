@@ -2,7 +2,7 @@ package Project.Entity;
 
 
 public class UserEntity {
-    int id;
+    String id;
     String name;
     String surname;
     int age;
@@ -13,7 +13,8 @@ public class UserEntity {
 
 
     public UserEntity(){}
-    public UserEntity( String name, String surname, String username, String password,int age, String address, int balance) {
+    public UserEntity(String id ,String name, String surname, String username, String password,int age, String address, int balance) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.username = username;
@@ -23,11 +24,11 @@ public class UserEntity {
         this.balance = balance;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

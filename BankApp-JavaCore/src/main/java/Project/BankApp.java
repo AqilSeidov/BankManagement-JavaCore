@@ -8,9 +8,6 @@ import java.util.List;
 
 public class BankApp {
     public static void main(String[] args) {
-        DaoImpl dao = new DaoImpl();
-        UserSignUp userSignUp = new UserSignUp();
-        dao.addUser(userSignUp.saveUser());
 
     }
 }

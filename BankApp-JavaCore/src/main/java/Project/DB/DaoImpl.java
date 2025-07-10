@@ -32,5 +32,67 @@ public class DaoImpl implements DAO {
         System.out.println("Successfully Registered");
     }
 
+
+    @Override
+    public UserEntity getUser(String userName, String password) {
+        String sql = "SELECT * FROM userdata WHERE username=? AND password=?";
+
+        try(Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setString(1,userName);
+            stmt.setString(2,password);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new UserEntity(
+                        rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getInt("age"),
+                        rs.getString("address"),
+                        rs.getInt("balance")
+                );
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+
+    @Override
+    public UserEntity getUserById(String id) {
+        String sql = "SELECT * FROM userdata WHERE id=?";
+
+        try(Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setString(1,id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new UserEntity(
+                        rs.getString("id"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getInt("age"),
+                        rs.getString("address"),
+                        rs.getInt("balance")
+                );
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }
 
