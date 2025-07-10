@@ -71,7 +71,7 @@ public class UserSignUp {
     }
 
 
-    public void saveUser(){
+    public UserEntity saveUser(){
         UserEntity user = new UserEntity();
         Scanner input = new Scanner(System.in);
 
@@ -96,6 +96,6 @@ public class UserSignUp {
         //balance
         user.setBalance(checkInt("balance",input));
 
-        System.out.println(user);
+        return user;
     }
 }

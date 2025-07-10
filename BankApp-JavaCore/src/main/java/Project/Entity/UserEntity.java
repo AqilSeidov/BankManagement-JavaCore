@@ -1,13 +1,7 @@
 package Project.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
-@Entity
-@Table()
 public class UserEntity {
-    @Id
     int id;
     String name;
     String surname;
@@ -17,16 +11,15 @@ public class UserEntity {
     String password;
     int balance;
 
-    public UserEntity() {}
 
-    public UserEntity(int id, String name, String surname, int age, String address, String username, String password, int balance) {
-        this.id = id;
+    public UserEntity(){}
+    public UserEntity( String name, String surname, String username, String password,int age, String address, int balance) {
         this.name = name;
         this.surname = surname;
-        this.age = age;
-        this.address = address;
         this.username = username;
         this.password = password;
+        this.age = age;
+        this.address = address;
         this.balance = balance;
     }
 
@@ -38,6 +31,7 @@ public class UserEntity {
         this.id = id;
     }
 
+
     public String getName() {
         return name;
     }
@@ -45,6 +39,7 @@ public class UserEntity {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public String getSurname() {
         return surname;
@@ -54,6 +49,7 @@ public class UserEntity {
         this.surname = surname;
     }
 
+
     public int getAge() {
         return age;
     }
@@ -61,6 +57,7 @@ public class UserEntity {
     public void setAge(int age) {
         this.age = age;
     }
+
 
     public String getAddress() {
         return address;
@@ -70,6 +67,7 @@ public class UserEntity {
         this.address = address;
     }
 
+
     public String getUsername() {
         return username;
     }
@@ -78,6 +76,7 @@ public class UserEntity {
         this.username = username;
     }
 
+
     public String getPassword() {
         return password;
     }
@@ -85,6 +84,7 @@ public class UserEntity {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     public int getBalance() {
         return balance;
