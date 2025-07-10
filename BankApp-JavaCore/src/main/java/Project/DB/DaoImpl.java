@@ -93,6 +93,26 @@ public class DaoImpl implements DAO {
         return null;
     }
 
+    @Override
+    public void updateBalance(String id, int newBalance) {
+        String sql = "UPDATE userdata SET balance = ? WHERE id = ?";
+        try (Connection conn = DbConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, newBalance);
+            stmt.setString(2, id);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Balance update failed.");
+        }
+    }
+
 
 }
+
+
+
 
