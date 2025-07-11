@@ -34,4 +34,30 @@ public class Operations implements OpertionsInterface {
     }
 
 
+    @Override
+    public void transfer(UserEntity user, String transferId, double amount) {
+
+        UserEntity transferProfile = dao.getUserById(transferId);
+
+        if(transferProfile == null) {
+            System.out.printf("User with %s ID not found %n" , transferId);
+        }
+        else {
+            if (user.getBalance() < amount) {
+                System.out.println("Insufficient balance. Your balance: " + user.getBalance());
+            } else {
+                //Decrement
+                user.setBalance(user.getBalance() - amount);
+                dao.updateBalance(user.getId(), user.getBalance());
+
+                //Increment
+                transferProfile.setBalance(transferProfile.getBalance() + amount);
+                dao.updateBalance(transferProfile.getId(), transferProfile.getBalance());
+
+                System.out.println("Transfer successful. New balance: " + user.getBalance());
+            }
+        }
+    }
+
+
 }
