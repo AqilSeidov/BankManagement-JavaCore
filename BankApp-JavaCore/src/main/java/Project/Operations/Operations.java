@@ -3,7 +3,7 @@ package Project.Operations;
 import Project.DB.DaoImpl;
 import Project.Entity.UserEntity;
 
-public class Operations implements OpertionsInterface {
+public class Operations implements OperationsInterface {
     DaoImpl dao = new DaoImpl();
 
 

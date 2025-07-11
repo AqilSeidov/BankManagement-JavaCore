@@ -29,7 +29,6 @@ public class DaoImpl implements DAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("Successfully Registered");
     }
 
 
