@@ -9,11 +9,11 @@ public class UserEntity {
     String address;
     String username;
     String password;
-    int balance;
+    double balance;
 
 
     public UserEntity(){}
-    public UserEntity(String id ,String name, String surname, String username, String password,int age, String address, int balance) {
+    public UserEntity(String id ,String name, String surname, String username, String password,int age, String address, double balance) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -87,11 +87,11 @@ public class UserEntity {
     }
 
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

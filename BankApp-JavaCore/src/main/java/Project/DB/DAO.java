@@ -11,6 +11,6 @@ public interface DAO {
 
     public UserEntity getUserById(String id);
 
-    public void updateBalance(String id, int newBalance);
+    public void updateBalance(String id, double newBalance);
 
 }
