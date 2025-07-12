@@ -1,10 +1,13 @@
 package Project.Login;
 
+import Project.DB.DaoImpl;
 import Project.Entity.UserEntity;
 
 import java.util.Scanner;
 
 public class UserSignUp {
+
+    DaoImpl dao = new DaoImpl();
 
     public String checkStr(String formatWord,Scanner sc) {
         String word;
@@ -89,6 +92,14 @@ public class UserSignUp {
 
         //username
         user.setUsername(checkMix("username",input));
+        boolean check = dao.checkUnique(user.getUsername());
+
+        while(!check){
+            System.out.println("Username already exists.");
+            user.setUsername(checkMix("username",input));
+            check = dao.checkUnique(user.getUsername());
+        }
+
 
         //password
         user.setPassword(checkMix("password",input));

@@ -13,4 +13,5 @@ public interface DAO {
 
     public void updateBalance(String id, double newBalance);
 
+    public boolean checkUnique(String userName);
 }

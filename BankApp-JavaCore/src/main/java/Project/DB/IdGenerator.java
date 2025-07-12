@@ -1,9 +1,10 @@
 package Project.DB;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class IdGenerator {
-    final Random rand = new Random();
+    final SecureRandom rand = new SecureRandom();
     final String charSet = "abXYZ0cdefgKLMNOPhijkCDITlmJQRSnopqrs234567tuvEFGHwxyzABUVW189";
     public String generateId() {
 
@@ -14,3 +15,4 @@ public class IdGenerator {
         return id.toString();
     }
 }
+

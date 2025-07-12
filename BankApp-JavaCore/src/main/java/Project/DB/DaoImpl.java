@@ -1,8 +1,10 @@
 package Project.DB;
 
 import Project.Entity.UserEntity;
+import Project.Login.UserSignUp;
 
 import java.sql.*;
+import java.util.Scanner;
 
 public class DaoImpl implements DAO {
 
@@ -13,8 +15,9 @@ public class DaoImpl implements DAO {
 
         String sql = "INSERT INTO userdata (id, username,password,name,surname,age,address,balance) VALUES (?,?,?,?,?,?,?,?)";
 
-        try (Connection conn = DbConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try {
+            Connection conn = DbConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, idGenerator.generateId());
             stmt.setString(2, user.getUsername());
             stmt.setString(3, user.getPassword());
@@ -107,6 +110,24 @@ public class DaoImpl implements DAO {
             e.printStackTrace();
             System.out.println("Balance update failed.");
         }
+    }
+
+    @Override
+    public boolean checkUnique(String userName) {
+        String sql = "SELECT * FROM userdata WHERE username=?";
+
+        try (Connection conn = DbConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, userName);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {return false;}
+        }
+        catch(SQLException e){
+                e.printStackTrace();
+            }
+            return true;
+
     }
 
 
