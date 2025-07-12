@@ -12,9 +12,9 @@ import java.util.Scanner;
 
 public class BankApp {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        //Scanner sc = new Scanner(System.in);
         Display display = new Display();
-        display.displayAccAccess(sc);
+        display.displayAccAccess();
 
     }
 }
