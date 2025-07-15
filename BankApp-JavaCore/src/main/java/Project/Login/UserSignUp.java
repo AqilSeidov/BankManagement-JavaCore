@@ -68,12 +68,13 @@ public class UserSignUp {
     public String checkUsername(Scanner sc) {
         System.out.print("Enter your username: ");
         String username = sc.nextLine();
-        String regex = "^[A-Za-z][A-Za-z0-9_]{4,14}$";
+        String regex = "^(?=.*\\d)[A-Za-z][A-Za-z0-9_]{6,14}$";
 
         while (!username.matches(regex)) {
             System.out.println("Invalid username. It must:\n" +
-                    "- Be 5–15 characters long\n" +
+                    "- Be 7–15 characters long\n" +
                     "- Start with a letter\n" +
+                    "- Have at least one digit\n" +
                     "- Contain only letters, numbers, or underscores\n");
             System.out.print("Please enter a valid username: ");
             username = sc.nextLine();
@@ -81,8 +82,21 @@ public class UserSignUp {
 
         return username;
     }
-
-
+    public String checkPassword(Scanner sc) {
+        System.out.print("Enter your password: ");
+        String password = sc.nextLine();
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-={}\\[\\]:;\"'<>?,./]).{6,}$";
+        while (!password.matches(regex)) {
+            System.out.println("Invalid Password. It must:\n" +
+                    "- Be at least 6 characters long\n" +
+                    "- Have at least one uppercase and lowercase letter\n" +
+                    "- Have at least one digit\n" +
+                    "- Have at least one symbol\n");
+            System.out.print("Please enter a valid password: ");
+            password = sc.nextLine();
+        }
+        return password;
+    }
 
 
     public UserEntity saveUser(){
@@ -108,13 +122,13 @@ public class UserSignUp {
 
         while(!check){
             System.out.println("Username already exists.");
-            user.setUsername(checkMix("username",input));
+            user.setUsername(checkUsername(input));
             check = dao.checkUnique(user.getUsername());
         }
 
 
         //password
-        user.setPassword(checkMix("password",input));
+        user.setPassword(checkPassword(input));
 
         //balance
         user.setBalance(checkInt("balance",input));
