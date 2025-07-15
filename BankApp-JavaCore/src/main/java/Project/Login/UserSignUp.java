@@ -14,10 +14,10 @@ public class UserSignUp {
         do{
             System.out.printf("Enter your %s: " , formatWord);
             word = sc.nextLine();
-            if(word.trim().isEmpty() || !word.matches("[a-zA-Z]+")){
+            if(word.trim().isEmpty() || !word.matches("[a-zA-Z. ]+")){
                 System.out.printf("Invalid %s. Please enter only letters and don't leave it blank.\n" , formatWord);
             }
-        }while(word.trim().isEmpty() || !word.matches("[a-zA-Z]+"));
+        }while(word.trim().isEmpty() || !word.matches("[a-zA-Z. ]+"));
         return word;
     }
 
