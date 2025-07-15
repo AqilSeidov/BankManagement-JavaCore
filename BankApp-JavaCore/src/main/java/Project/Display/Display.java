@@ -84,9 +84,10 @@ public class Display {
                     "\n2. Withdraw" +
                     "\n3. Transfer" +
                     "\n4. View Balance" +
-                    "\n5. Exit");
+                    "\n5. Get All Data" +
+                    "\n6. Exit");
 
-            int choice = validate.validateInput(sc, 1, 5);
+            int choice = validate.validateInput(sc, 1, 6);
 
             switch (choice) {
                 case 1:
@@ -123,6 +124,16 @@ public class Display {
                     System.out.println("Current Balance: " + profile.getBalance());
                     break;
                 case 5:
+                    System.out.println("Id: " + profile.getId()
+                            +"\nName: "+ profile.getName()
+                            +"\nSurname: "+ profile.getSurname()
+                            +"\nAge: "+profile.getAge()
+                            +"\nAddress: "+ profile.getAddress()
+                            +"\nUsername: "+profile.getUsername()
+                            +"\nBalance: "+profile.getBalance());
+                    break;
+
+                case 6:
                     displayAccAccess();
                     return;
             }
