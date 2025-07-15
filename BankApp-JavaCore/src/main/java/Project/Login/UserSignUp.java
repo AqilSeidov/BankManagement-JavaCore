@@ -55,23 +55,34 @@ public class UserSignUp {
             System.out.printf("Enter your %s: " , formatWord);
             word = sc.nextLine();
 
-            if(formatWord.equals("address")){
+            if(word.trim().isEmpty() || !word.matches("^[A-Za-z0-9_.\\- ]+$")){
+                System.out.printf("Invalid %s. Please don't leave it blank and use only letters, positive numbers and '_','.','-' symbols.\n", formatWord);
 
-                if(word.trim().isEmpty() || !word.matches("^[A-Za-z0-9_.\\- ]+$")){
-                    System.out.printf("Invalid %s. Please don't leave it blank and use only letters, positive numbers and '_','.','-' symbols.\n", formatWord);
+            } else break;
 
-                } else break;
-            }
-            else{
-
-                if(word.trim().isEmpty() || !word.matches("^[A-Za-z0-9_.-]+$")){
-                    System.out.printf("Invalid %s. Please don't leave it blank and use only letters, positive numbers and '_','.','-' symbols.\n", formatWord);
-
-                }else break;
-            }
         }
+
         return word;
     }
+
+    public String checkUsername(Scanner sc) {
+        System.out.print("Enter your username: ");
+        String username = sc.nextLine();
+        String regex = "^[A-Za-z][A-Za-z0-9_]{4,14}$";
+
+        while (!username.matches(regex)) {
+            System.out.println("Invalid username. It must:\n" +
+                    "- Be 5–15 characters long\n" +
+                    "- Start with a letter\n" +
+                    "- Contain only letters, numbers, or underscores\n");
+            System.out.print("Please enter a valid username: ");
+            username = sc.nextLine();
+        }
+
+        return username;
+    }
+
+
 
 
     public UserEntity saveUser(){
@@ -91,7 +102,8 @@ public class UserSignUp {
         user.setAddress(checkMix("address",input));
 
         //username
-        user.setUsername(checkMix("username",input));
+
+        user.setUsername(checkUsername(input));
         boolean check = dao.checkUnique(user.getUsername());
 
         while(!check){
