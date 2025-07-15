@@ -1,14 +1,19 @@
 package Project.DB;
 
+import Project.Display.Display;
 import Project.Entity.UserEntity;
-import Project.Login.UserSignUp;
 
-import java.sql.*;
-import java.util.Scanner;
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class DaoImpl implements DAO {
 
     IdGenerator idGenerator = new IdGenerator();
+
 
     @Override
     public void addUser(UserEntity user) {
@@ -130,7 +135,25 @@ public class DaoImpl implements DAO {
 
     }
 
+    @Override
+    public void update(UserEntity user) {
+        String sql = "UPDATE userdata SET name =?,surname = ? , age = ? , address = ?, username=? ,password = ? WHERE id = ?";
+        try (Connection conn = DbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getSurname());
+            stmt.setInt(3, user.getAge());
+            stmt.setString(4, user.getAddress());
+            stmt.setString(5, user.getUsername());
+            stmt.setString(6, user.getPassword());
+            stmt.setString(7, user.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 

@@ -18,7 +18,7 @@ public class Display {
     Operations operations = new Operations();
     ValidateAmount validateAmount = new ValidateAmount();
 
-    UserEntity profile;
+    public static UserEntity profile = null;
 
     Scanner sc = new Scanner(System.in);
 
@@ -85,9 +85,10 @@ public class Display {
                     "\n3. Transfer" +
                     "\n4. View Balance" +
                     "\n5. Get All Data" +
-                    "\n6. Exit");
+                    "\n6. Update Data" +
+                    "\n7. Exit");
 
-            int choice = validate.validateInput(sc, 1, 6);
+            int choice = validate.validateInput(sc, 1, 7);
 
             switch (choice) {
                 case 1:
@@ -124,7 +125,7 @@ public class Display {
                     System.out.println("Current Balance: " + profile.getBalance());
                     break;
                 case 5:
-                    System.out.println("Id: " + profile.getId()
+                    System.out.println("\nId: " + profile.getId()
                             +"\nName: "+ profile.getName()
                             +"\nSurname: "+ profile.getSurname()
                             +"\nAge: "+profile.getAge()
@@ -133,7 +134,46 @@ public class Display {
                             +"\nBalance: "+profile.getBalance());
                     break;
 
-                case 6:
+
+               case 6:
+                   int fieldChoice;
+                   do{
+                   System.out.println("\nSelect Field: " +
+                           "\n1. Name" +
+                           "\n2. Surname" +
+                           "\n3. Username" +
+                           "\n4. Password" +
+                           "\n5. Age" +
+                           "\n6. Address" +
+                           "\n7. Save and Exit");
+                   fieldChoice = validate.validateInput(sc, 1, 7);
+                   switch (fieldChoice) {
+                       case 1:
+                           profile.setName(userSignUp.checkStr("name"));
+                           break;
+                       case 2:
+                           profile.setSurname(userSignUp.checkStr("surname"));
+                           break;
+                       case 3:
+                           profile.setUsername(userSignUp.checkUsername());
+                           break;
+                       case 4:
+                           profile.setPassword(userSignUp.checkPassword());
+                           break;
+                       case 5:
+                           profile.setAge(userSignUp.checkInt("age"));
+                           break;
+                       case 6:
+                           profile.setAddress(userSignUp.checkMix("address"));
+                           break;
+                       case 7:
+                           dao.update(profile);
+                           displayAccAccess();
+                           break;
+                   }}while(fieldChoice != 7);
+                   break;
+
+               case 7:
                     displayAccAccess();
                     return;
             }

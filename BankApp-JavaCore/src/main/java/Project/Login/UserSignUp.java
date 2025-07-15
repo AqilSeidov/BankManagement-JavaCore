@@ -6,10 +6,10 @@ import Project.Entity.UserEntity;
 import java.util.Scanner;
 
 public class UserSignUp {
-
+    Scanner sc = new Scanner(System.in);
     DaoImpl dao = new DaoImpl();
 
-    public String checkStr(String formatWord,Scanner sc) {
+    public String checkStr(String formatWord) {
         String word;
         do{
             System.out.printf("Enter your %s: " , formatWord);
@@ -22,14 +22,14 @@ public class UserSignUp {
     }
 
 
-    public int checkInt(String formatWord, Scanner sc){
+    public int checkInt(String formatWord){
         int number;
 
         while(true){
             System.out.printf("Enter your %s: " , formatWord);
 
             while (!sc.hasNextInt()) {
-                System.out.println("Please enter an integer.");
+                System.out.print("Please enter an integer: ");
                 sc.next();
             }
             number = sc.nextInt();
@@ -49,7 +49,7 @@ public class UserSignUp {
         return number;
     }
 
-    public String checkMix(String formatWord, Scanner sc){
+    public String checkMix(String formatWord){
         String word;
         while(true){
             System.out.printf("Enter your %s: " , formatWord);
@@ -65,7 +65,7 @@ public class UserSignUp {
         return word;
     }
 
-    public String checkUsername(Scanner sc) {
+    public String checkUsername() {
         System.out.print("Enter your username: ");
         String username = sc.nextLine();
         String regex = "^(?=.*\\d)[A-Za-z][A-Za-z0-9_]{6,14}$";
@@ -82,7 +82,7 @@ public class UserSignUp {
 
         return username;
     }
-    public String checkPassword(Scanner sc) {
+    public String checkPassword() {
         System.out.print("Enter your password: ");
         String password = sc.nextLine();
         String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*()_+\\-={}\\[\\]:;\"'<>?,./]).{6,}$";
@@ -104,34 +104,34 @@ public class UserSignUp {
         Scanner input = new Scanner(System.in);
 
         //Name
-        user.setName(checkStr("name",input));
+        user.setName(checkStr("name"));
 
         //Surname
-        user.setSurname(checkStr("surname",input));
+        user.setSurname(checkStr("surname"));
 
         //Age
-        user.setAge(checkInt("age",input));
+        user.setAge(checkInt("age"));
 
         //address
-        user.setAddress(checkMix("address",input));
+        user.setAddress(checkMix("address"));
 
         //username
 
-        user.setUsername(checkUsername(input));
+        user.setUsername(checkUsername());
         boolean check = dao.checkUnique(user.getUsername());
 
         while(!check){
             System.out.println("Username already exists.");
-            user.setUsername(checkUsername(input));
+            user.setUsername(checkUsername());
             check = dao.checkUnique(user.getUsername());
         }
 
 
         //password
-        user.setPassword(checkPassword(input));
+        user.setPassword(checkPassword());
 
         //balance
-        user.setBalance(checkInt("balance",input));
+        user.setBalance(checkInt("balance"));
 
         return user;
     }

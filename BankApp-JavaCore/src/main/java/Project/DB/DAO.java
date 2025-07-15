@@ -15,4 +15,6 @@ public interface DAO {
 
     public boolean checkUnique(String userName);
 
+    public void update(UserEntity user);
+
 }
