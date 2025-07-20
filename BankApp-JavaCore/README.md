@@ -66,7 +66,8 @@ The project is organized into several packages:
         surname VARCHAR(255),
         age INT,
         address VARCHAR(255),
-        balance DOUBLE
+        balance DOUBLE,
+        salt VARCHAR(24)
     );
     ```
 
