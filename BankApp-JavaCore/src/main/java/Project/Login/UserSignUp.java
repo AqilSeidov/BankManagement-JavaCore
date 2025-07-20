@@ -2,12 +2,15 @@ package Project.Login;
 
 import Project.DB.DaoImpl;
 import Project.Entity.UserEntity;
+import Project.Hashing.HashHandler;
 
+import java.util.Base64;
 import java.util.Scanner;
 
 public class UserSignUp {
     Scanner sc = new Scanner(System.in);
     DaoImpl dao = new DaoImpl();
+    HashHandler hashing = new HashHandler();
 
     public String checkStr(String formatWord) {
         String word;
@@ -128,7 +131,16 @@ public class UserSignUp {
 
 
         //password
-        user.setPassword(checkPassword());
+        String rawPassword = checkPassword();
+        try {
+            byte[] salt = hashing.generateSalt();
+            String hashedPassword = hashing.hashPassword(rawPassword, salt);
+            user.setPassword(hashedPassword);
+            user.setSalt(Base64.getEncoder().encodeToString(salt)); // Store salt in DB
+        } catch (Exception e) {
+            System.err.println("Error hashing password: " + e.getMessage());
+            return null;
+        }
 
         //balance
         user.setBalance(checkInt("balance"));

@@ -18,7 +18,7 @@ public class DaoImpl implements DAO {
     @Override
     public void addUser(UserEntity user) {
 
-        String sql = "INSERT INTO userdata (id, username,password,name,surname,age,address,balance) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO userdata (id, username,password,name,surname,age,address,balance,salt) VALUES (?,?,?,?,?,?,?,?,?)";
 
         try {
             Connection conn = DbConnection.getConnection();
@@ -31,6 +31,7 @@ public class DaoImpl implements DAO {
             stmt.setInt(6, user.getAge());
             stmt.setString(7, user.getAddress());
             stmt.setDouble(8, user.getBalance());
+            stmt.setString(9, user.getSalt());
 
             stmt.executeUpdate();
 
@@ -41,14 +42,13 @@ public class DaoImpl implements DAO {
 
 
     @Override
-    public UserEntity getUser(String userName, String password) {
-        String sql = "SELECT * FROM userdata WHERE username=? AND password=?";
+    public UserEntity getUser(String userName) {
+        String sql = "SELECT * FROM userdata WHERE username=?";
 
         try (Connection conn = DbConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, userName);
-            stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -60,7 +60,8 @@ public class DaoImpl implements DAO {
                         rs.getString("password"),
                         rs.getInt("age"),
                         rs.getString("address"),
-                        rs.getInt("balance")
+                        rs.getInt("balance"),
+                        rs.getString("salt")
                 );
             }
         } catch (SQLException e) {
@@ -91,7 +92,8 @@ public class DaoImpl implements DAO {
                         rs.getString("password"),
                         rs.getInt("age"),
                         rs.getString("address"),
-                        rs.getDouble("balance")
+                        rs.getDouble("balance"),
+                        rs.getString("salt")
                 );
             }
         } catch (SQLException e) {

@@ -7,7 +7,7 @@ public interface DAO {
 
     public void addUser(UserEntity user);
 
-    public UserEntity getUser(String userName, String password);
+    public UserEntity getUser(String userName);
 
     public UserEntity getUserById(String id);
 

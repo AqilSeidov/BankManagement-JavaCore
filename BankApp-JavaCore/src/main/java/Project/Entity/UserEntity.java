@@ -10,10 +10,11 @@ public class UserEntity {
     String username;
     String password;
     double balance;
+    String salt;
 
 
     public UserEntity(){}
-    public UserEntity(String id ,String name, String surname, String username, String password,int age, String address, double balance) {
+    public UserEntity(String id ,String name, String surname, String username, String password,int age, String address, double balance,String salt) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -22,6 +23,7 @@ public class UserEntity {
         this.age = age;
         this.address = address;
         this.balance = balance;
+        this.salt = salt;
     }
 
     public String getId() {
@@ -95,10 +97,14 @@ public class UserEntity {
         this.balance = balance;
     }
 
+    public String getSalt() {return salt;}
+
+    public void setSalt(String salt) {this.salt = salt;}
+
     @Override
     public String toString() {
-        return "UserDetails{" +
-                "id=" + id +
+        return "UserEntity{" +
+                "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
@@ -106,6 +112,7 @@ public class UserEntity {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", balance=" + balance +
+                ", salt='" + salt + '\'' +
                 '}';
     }
 }
